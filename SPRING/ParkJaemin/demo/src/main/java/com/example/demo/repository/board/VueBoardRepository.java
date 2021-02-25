@@ -1,7 +1,7 @@
-package com.example.demo.repository.vue;
+package com.example.demo.repository.board;
 
 
-import com.example.demo.entity.vue.VueBoard;
+import com.example.demo.entity.board.VueBoard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+// DB 결합 또는 저장용도
 @Repository
 public class VueBoardRepository {
     @Autowired
@@ -26,42 +28,42 @@ public class VueBoardRepository {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
-            new PreparedStatementCreator() {
-                @Override
-                public PreparedStatement createPreparedStatement(Connection con)
-                        throws SQLException {
-                    PreparedStatement ps = con.prepareStatement(query, new String[] {"boardNo"});
-                    ps.setString(1, board.getTitle());
-                    ps.setString(2, board.getContent());
-                    ps.setString(3, board.getWriter());
-                    return ps;
-                }
-            }, keyHolder);
+                new PreparedStatementCreator() {
+                    @Override
+                    public PreparedStatement createPreparedStatement(Connection con)
+                            throws SQLException {
+                        PreparedStatement ps = con.prepareStatement(query, new String[] {"boardNo"});
+                        ps.setString(1, board.getTitle());
+                        ps.setString(2, board.getContent());
+                        ps.setString(3, board.getWriter());
+                        return ps;
+                    }
+                }, keyHolder);
 
         board.setBoardNo(keyHolder.getKey().longValue());
     }
 
     public VueBoard read(Long boardNo) throws Exception {
         List<VueBoard> results = jdbcTemplate.query(
-            "select board_no, title, content, writer, reg_date " +
-                    "from board where board_no = ?",
-            new RowMapper<VueBoard>() {
-                @Override
-                public VueBoard mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    VueBoard board = new VueBoard();
+                "select board_no, title, content, writer, reg_date " +
+                        "from board where board_no = ?",
+                new RowMapper<VueBoard>() {
+                    @Override
+                    public VueBoard mapRow(ResultSet rs, int rowNum)
+                            throws SQLException {
+                        VueBoard board = new VueBoard();
 
-                    board.setBoardNo(rs.getInt("board_no"));
-                    board.setTitle(rs.getString("title"));
-                    board.setContent(rs.getString("content"));
-                    board.setWriter(rs.getString("writer"));
-                    board.setRegDate(rs.getDate("reg_date"));
+                        board.setBoardNo(rs.getInt("board_no"));
+                        board.setTitle(rs.getString("title"));
+                        board.setContent(rs.getString("content"));
+                        board.setWriter(rs.getString("writer"));
+                        board.setRegDate(rs.getDate("reg_date"));
 
-                    System.out.println("VueBoardRepository: " + board);
+                        System.out.println("VueBoardRepository: " + board);
 
-                    return board;
-                }
-            }, boardNo
+                        return board;
+                    }
+                }, boardNo
         );
 
         return results.isEmpty() ? null : results.get(0);

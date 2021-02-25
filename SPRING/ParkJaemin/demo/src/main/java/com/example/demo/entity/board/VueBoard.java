@@ -1,4 +1,4 @@
-package com.example.demo.entity.vue;
+package com.example.demo.entity.board;
 
 import lombok.Getter;
 import lombok.Setter;

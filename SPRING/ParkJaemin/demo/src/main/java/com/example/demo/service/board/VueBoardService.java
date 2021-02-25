@@ -1,6 +1,6 @@
-package com.example.demo.service.vue;
+package com.example.demo.service.board;
 
-import com.example.demo.entity.vue.VueBoard;
+import com.example.demo.entity.board.VueBoard;
 
 import java.util.List;
 

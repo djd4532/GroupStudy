@@ -38,7 +38,7 @@ public class LogsignController {
         log.info("doRegister()");
         log.info("userId = " + testMember.getUserName());
         log.info("passwd = " + testMember.getPassword());
-        log.info("passwdiden = " + testMember.getPasswordIden());
+        log.info("passwdiden = " + testMember.getPasswordiden());
         log.info("phoneNum = " + testMember.getPhoneNum());
         log.info("Email = " + testMember.getEmail());
 

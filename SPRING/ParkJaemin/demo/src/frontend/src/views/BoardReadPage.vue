@@ -12,12 +12,10 @@
     </router-link>
   </div>
 </template>
-
 <script>
 import BoardRead from '@/components/BoardRead'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
-
 export default {
   name: 'BoardReadPage',
   props: {
@@ -34,10 +32,10 @@ export default {
   created () {
     console.log('BoardReadPage created(): ' + this.boardNo)
     this.fetchBoard(this.boardNo)
-      .catch(err => {
-        alert(err.response.data.message)
-        this.$router.push()
-      })
+        .catch(err => {
+          alert(err.response.data.message)
+          this.$router.push()
+        })
   },
   methods: {
     ...mapActions([
@@ -46,13 +44,13 @@ export default {
     onDelete () {
       const { boardNo } = this.board
       axios.delete(`http://localhost:7777/boards/${boardNo}`)
-        .then(() => {
-          alert('Delete Success')
-          this.$router.push({ name: 'BoardListPage' })
-        })
-        .catch(err => {
-          alert(err.response.data.message)
-        })
+          .then(() => {
+            alert('Delete Success')
+            this.$router.push({ name: 'BoardListPage' })
+          })
+          .catch(err => {
+            alert(err.response.data.message)
+          })
     }
   },
   components: {

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>수정 형식</h3>
+    <!-- 제출 된 이벤트가 페이지를 다시 로드 하지 않도록 함-->
     <form @submit.prevent="onSubmit">
       <table>
         <tr>
@@ -62,3 +63,4 @@ export default {
   }
 }
 </script>
+

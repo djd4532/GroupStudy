@@ -1,7 +1,7 @@
-package com.example.demo.controller.vue;
+package com.example.demo.controller.board;
 
-import com.example.demo.entity.vue.VueBoard;
-import com.example.demo.service.vue.VueBoardService;
+import com.example.demo.entity.board.VueBoard;
+import com.example.demo.service.board.VueBoardService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-
 @Log
 @RestController
 @RequestMapping("/boards")
@@ -23,7 +22,6 @@ public class VueBoardController {
     @Autowired
     private VueBoardService service;
 
-    // url 동적으로 받는거
     @GetMapping("/{boardNo}")
     public ResponseEntity<VueBoard> read(
             @PathVariable("boardNo") Long boardNo) throws Exception {
@@ -57,7 +55,6 @@ public class VueBoardController {
                 .buildAndExpand(board.getBoardNo())
                 .encode()
                 .toUri();
-
         return ResponseEntity.created(resourceURI).build();
          */
 
@@ -87,3 +84,5 @@ public class VueBoardController {
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 }
+
+

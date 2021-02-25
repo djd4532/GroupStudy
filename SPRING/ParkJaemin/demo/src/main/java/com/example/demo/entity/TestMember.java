@@ -12,7 +12,7 @@ import java.util.List;
 public class TestMember {
     private String userName = "bitweb";
     private String password = "456123";
-    private String passwordIden = "456123";
+    private String passwordiden = "456123";
     private String PhoneNum = "456123";
     private String Email = "456123";
     private String introduction;
